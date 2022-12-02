@@ -1,25 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
+import Clicker from './Clicker.js'
+import { useMemo , useState } from 'react'
+import People from './People.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+export default function App({ clickersCount,children })
+{
+
+  const [ count, setCount ] = useState(0)
+  const [ hasClicker, setHasClicker ] = useState(true)
+  
+
+  const toggleClickerClick = () =>
+  {
+      setHasClicker(!hasClicker)
+  }
+
+  const increment = () =>
+  {
+      setCount(count + 1)
+  }
+
+
+  const colors = useMemo(() =>
+  {
+
+    const colors = []
+    for(let i = 0; i < clickersCount; i++)
+        colors.push(`hsl(${ Math.random() * 360 }deg, 100%, 75%)`)
+
+    return colors
+
+    
+    }, [clickersCount])
+
+
+ 
+
+  return <>
+     { children }
+        
+      <br></br>
+        <button onClick={ toggleClickerClick }>{ hasClicker ? 'Hide' : 'Show' }clicker</button>
+
+        <div>Total count: { count } </div>
+
+        { hasClicker && <>
+          { [...Array(clickersCount)].map((value, index) =>
+            <Clicker  
+            key={ index }
+            increment={ increment }
+             keyName={ `count${index}` }
+             color={ colors[index] }
+             />
+             ) }
+        </>}
+
+        <People />
+  </>
+
+
+
+
+
+
 }
 
-export default App;

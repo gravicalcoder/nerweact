@@ -1,12 +1,22 @@
-
+import App from './App.js'
 import { createRoot } from 'react-dom/client'
+import './style.css'
 const root = createRoot(document.querySelector('#root'))
-
+const toto = 'Tektonik'
+const tito = 'ajah'
 root.render(
-  <div>
-  <h1>Hello React</h1>
-  <p>harus standar</p>
+
+<div>
+
+    <h1 style={ { color: 'coral', backgroundColor: 'floralwhite' } } className="title">Hello { toto }</h1>
+  <p>Some<br />content { Math.random() }</p>
+  <h1 className="cute-paragraph" >kamana { tito }</h1>
+    <App clickersCount={ 10 }> don't know why my dream comes</App>
+
+
+ 
 </div>
+
 )
 
 
@@ -39,3 +49,11 @@ root.render(
 reportWebVitals();
 
 */
+
+/* old -2
+
+ <h1 style={ { color: 'coral', backgroundColor: 'floralwhite' } } className="title">Hello { toto }</h1>
+  <p>Some<br />content { Math.random() }</p>
+  <h1 className="cute-paragraph" >kamana { tito }</h1>
+
+  */
